@@ -1,0 +1,25 @@
+{
+  "name": "sxturn-discord-bot",
+  "version": "1.0.0",
+  "description": "Personal discord bot with many planned features and commands.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sxturndev/sxturn-discord-bot.git"
+  },
+  "author": "",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/sxturndev/sxturn-discord-bot/issues"
+  },
+  "homepage": "https://github.com/sxturndev/sxturn-discord-bot#readme",
+  "dependencies": {
+    "discord.js": "^13.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.3.0"
+  }
+}
