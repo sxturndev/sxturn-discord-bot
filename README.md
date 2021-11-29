@@ -25,6 +25,11 @@ GUILD_ID=<discord server id here>
 TOKEN=<bot token>
 ```
 
+Registering slash commands
+```
+node .\deploy-commands.js
+```
+
 Running the bot
 ```
 npm run dev
