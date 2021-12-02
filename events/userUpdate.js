@@ -4,7 +4,7 @@ const sendLog = require('../functions/sendLog.js');
 
 module.exports = {
 	name: 'userUpdate',
-	execute(oldUser, newUser) {
+	execute(oldUser, newUser, client) {
 		const embed = new MessageEmbed()
 			.setTitle(`${oldUser.tag}`)
 			.setColor('YELLOW')
@@ -16,15 +16,17 @@ module.exports = {
 			logger.info(`LOGGING: ${oldUser.tag} changed their avatar.`);
 			embed.setThumbnail(newUser.displayAvatarURL);
 			embed.addField('**Avatar**', `[before](${oldUser.displayAvatarURL({ size: 2048, dynamic: true })}) -> [after](${newUser.displayAvatarURL({ size: 2048, dynamic: true })})`);
+			sendLog(client, embed);
 		}
 		if (oldUser.username !== newUser.username) {
 			logger.info(`LOGGING: ${oldUser.tag} changed their username to: ${newUser.username}`);
 			embed.addField('**Username**', `${oldUser.username} -> ${newUser.username}`);
+			sendLog(client, embed);
 		}
 		if (oldUser.discriminator !== newUser.discriminator) {
 			logger.info(`LOGGING: ${oldUser.tag} changed their discriminator to: ${newUser.discriminator}`);
 			embed.addField('**Tag**', `${oldUser.tag} -> ${newUser.tag}`);
+			sendLog(client, embed);
 		}
-		sendLog(embed);
 	},
 };

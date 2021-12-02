@@ -1,8 +1,9 @@
 require('dotenv').config();
-const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
+const fs = require('fs');
 const logger = require('./logger');
 const db = require('quick.db');
+const twitch = require('./twitch/twitch.js');
 
 const client = new Client({
 	restTimeOffset: 0,
@@ -12,17 +13,23 @@ const client = new Client({
 		Intents.FLAGS.GUILD_MESSAGES,
 		Intents.FLAGS.GUILD_MEMBERS,
 		Intents.FLAGS.GUILD_VOICE_STATES,
-		Intents.FLAGS.GUILD_MESSAGE_REACTIONS] });
-module.exports = client;
+		Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+	],
+});
 
-client.once('ready', () => {
+client.once('ready', async () => {
 	logger.info('Bot ready.');
 
-	// Check if logging channel is set.
 	if (!db.get('log_channel')) {
 		logger.warn('Logging channel not found. Please set a logging channel.');
 		db.set('log_channel', '');
 	}
+	if (!db.get('alert_channel')) {
+		logger.warn('Alert channel for Twitch notifications not set, please consider doing that with /alert channel.');
+		db.set('alert_channel', '');
+	}
+
+	twitch.doSubscriptions(client);
 });
 
 client.on('interactionCreate', async interaction => {
@@ -52,10 +59,10 @@ for (const file of commandFiles) {
 for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
 	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args));
+		client.once(event.name, (...args) => event.execute(...args, client));
 	}
 	else {
-		client.on(event.name, (...args) => event.execute(...args));
+		client.on(event.name, (...args) => event.execute(...args, client));
 	}
 }
 

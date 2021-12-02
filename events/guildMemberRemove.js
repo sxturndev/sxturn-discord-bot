@@ -8,10 +8,10 @@ const setPresence = require('../functions/setPresence.js');
 
 module.exports = {
 	name: 'guildMemberRemove',
-	execute(member) {
+	execute(member, client) {
 		const user = member.user;
 		logger.info(`LOGGING: ${user.tag} has left the server.`);
-		setPresence();
+		setPresence(client);
 		const embed = new MessageEmbed()
 			.setTitle(`${user.username} just left the server.  We now have ${member.guild.memberCount} members.`)
 			.setColor('RED')
@@ -22,6 +22,6 @@ module.exports = {
 				{ name: '**Leave Date**', value: dayjs().format('MMMM D, YYYY h:mm A') },
 			)
 			.setTimestamp();
-		sendLog(embed);
+		sendLog(client, embed);
 	},
 };

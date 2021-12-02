@@ -9,10 +9,10 @@ const setPresence = require('../functions/setPresence.js');
 
 module.exports = {
 	name: 'guildMemberAdd',
-	execute(member) {
+	execute(member, client) {
 		const user = member.user;
 		logger.info(`LOGGING: ${user.tag} has joined the server.`);
-		setPresence();
+		setPresence(client);
 		const embed = new MessageEmbed()
 			.setTitle(`${user.username} just joined the server.`)
 			.setColor('#0099ff')
@@ -26,6 +26,6 @@ module.exports = {
 				{ name: '**Join Date**', value: dayjs(member.joinedAt).format('MMMM D, YYYY h:mm A') },
 			)
 			.setTimestamp();
-		sendLog(embed);
+		sendLog(client, embed);
 	},
 };

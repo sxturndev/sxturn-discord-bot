@@ -4,8 +4,9 @@ const sendLog = require('../functions/sendLog.js');
 
 module.exports = {
 	name: 'messageDelete',
-	execute(message) {
+	execute(message, client) {
 		if (message.author.bot) return;
+		if (!message.guild) return;
 
 		const embed = new MessageEmbed()
 			.setColor('RED')
@@ -16,6 +17,6 @@ module.exports = {
 			embed.addField('**Attachments**:', `${message.attachments.map(a => a.url)}`, true);
 		}
 		logger.info(`LOGGING: Message ${message.id} by ${message.author.tag} was deleted in ${message.channel.name}.`);
-		sendLog(embed);
+		sendLog(client, embed);
 	},
 };

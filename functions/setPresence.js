@@ -1,9 +1,8 @@
 require('dotenv').config();
 const logger = require('../logger.js');
-const client = require('../index.js');
 const guildId = process.env.GUILD_ID;
 
-module.exports = () => {
+module.exports = (client) => {
 	const guild = client.guilds.cache.get(guildId);
 	const userCount = guild.memberCount;
 	logger.info(`${userCount} users are in the guild. Setting presence.`);

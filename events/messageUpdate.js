@@ -4,7 +4,7 @@ const sendLog = require('../functions/sendLog.js');
 
 module.exports = {
 	name: 'messageUpdate',
-	execute(oldMessage, newMessage) {
+	execute(oldMessage, newMessage, client) {
 		if (oldMessage.author.bot) return;
 		if (oldMessage.content === newMessage.content) return;
 
@@ -20,6 +20,6 @@ module.exports = {
 			.setFooter(`User: ${newMessage.author.tag} | ID: ${newMessage.author.id}`);
 
 		logger.info(`LOGGING: Message ${oldMessage.id} was edited in ${oldMessage.channel.name} by ${oldMessage.author.tag}.`);
-		sendLog(embed);
+		sendLog(client, embed);
 	},
 };

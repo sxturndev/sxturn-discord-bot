@@ -6,6 +6,6 @@ module.exports = {
 	once: true,
 	execute(client) {
 		logger.info(`Logged in as ${client.user.tag}.`);
-		setPresence();
+		setPresence(client);
 	},
 };

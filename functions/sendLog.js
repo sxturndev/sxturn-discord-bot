@@ -1,9 +1,8 @@
 const logger = require('../logger.js');
-const client = require('../index.js');
 const db = require('quick.db');
 
-module.exports = (embed) => {
-	logger.info('Sending a log.');
+module.exports = (client, embed) => {
 	const logChannel = client.channels.cache.get(db.get('log_channel'));
+	logger.info(`Sending log in ${logChannel.name}`);
 	logChannel.send({ embeds: [embed] });
 };

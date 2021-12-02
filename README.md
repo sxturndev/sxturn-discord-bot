@@ -23,6 +23,9 @@ Example .env file
 CLIENT_ID=<bot client id here>
 GUILD_ID=<discord server id here>
 TOKEN=<bot token>
+TWITCH_ID=<twitch client id>
+TWITCH_SECRET=<twitch client secret>
+TWITCH_EVENTSUB_SECRET=<randomly generated string>
 ```
 
 Registering slash commands
