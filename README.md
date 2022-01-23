@@ -39,4 +39,4 @@ npm run dev
 ```
 
 ## Contact
-Discord - sadistik#8778
+Join my [Discord Server](https://discord.gg/9ckmwRTtBh).
